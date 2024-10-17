@@ -1,0 +1,37 @@
+# create databse for springboot
+-- Drop the employee table if it exists
+DROP TABLE IF EXISTS employee;
+
+-- Drop the company table if it exists
+DROP TABLE IF EXISTS company;
+
+-- Create the company table
+CREATE TABLE company (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+-- Create the employee table with a foreign key to the company table
+CREATE TABLE employee (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    photo_path VARCHAR(255),
+    company_id BIGINT,
+    FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE SET NULL
+);
+
+-- Insert sample companies into the company table
+INSERT INTO company (name) VALUES 
+('Luv2Code Ltd'), 
+('Tech Corp'), 
+('Edu Ltd');
+
+-- Insert sample employees into the employee table
+INSERT INTO employee (first_name, last_name, email, photo_path, company_id) VALUES 
+('Yuri', 'Petrov', 'yuri@luv2code.com', NULL, 1),
+('Tam', 'Nguyen', 'thanhtrungthuc107@gmail.com', NULL, 2),
+('He', 'Smith', '2201140077@ms.hanu.edu.vn', NULL, 3),
+('Fgvi', 'Jkhkb', 'lhkh@gmail.com', NULL, 1),
+('Vinh', 'Ngu', '21321@gmail.com', NULL, 2);
